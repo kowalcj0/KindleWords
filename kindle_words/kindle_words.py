@@ -1,11 +1,12 @@
 from string import digits
 import enchant
 from itertools import zip_longest
+import sqlite3
 
 
 def grouper(iterable, n, fillvalue=None):
     """
-    Will groupd lines in an opened file into chunks of n lines.
+    Will group lines in an opened file into chunks of n lines.
     SRC: http://stackoverflow.com/a/5845141
     """
     args = [iter(iterable)] * n
@@ -44,7 +45,24 @@ def open_clippings(filename):
     sort = sorted(correct)
     print(sort)
     print(len(sort))
+    return sort
 
+def transalate(words):
+    conn = sqlite3.connect('android-08-08-primary.sqlite')
+    c = conn.cursor()
+    to_translate = words[-10:]
+    for word in to_translate:
+        t = (word,)
+        query = ('SELECT e.entry, e.pronunciation_ipa, cb.content '
+                 'FROM entries e '
+                 'JOIN content_blocks cb '
+                 'ON e.id = cb.entry_id '
+                 'WHERE entry=?')
+        res = c.execute(query, t)
+        for row in res:
+            print(row)
+        #print('{} - {}'.format(word, str(dictionary.meaning(word))))
 
 if __name__ == '__main__':
-    open_clippings('./clippings.txt')
+    words = open_clippings('./clippings.txt')
+    transalate(words)
