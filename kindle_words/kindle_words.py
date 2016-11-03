@@ -1,7 +1,11 @@
+from typing import NamedTuple
 from string import digits
 import enchant
 from itertools import zip_longest
 import sqlite3
+
+
+Options = NamedTuple('Options', [('remove_specials', bool)])
 
 
 def grouper(iterable, n, fillvalue=None):
@@ -13,7 +17,21 @@ def grouper(iterable, n, fillvalue=None):
     return zip_longest(*args, fillvalue=fillvalue)
 
 
-def open_clippings(filename):
+def remove_specials(line, options):
+    """Will remove special characters from given string and strip it.
+
+    :param line: string with special characters
+    :type  line: str
+    :return: a stripped string without the special characters
+    :rtype: str
+    """
+    if options.remove_specials:
+        specials = "!@#$%^&*()[]{};:,./<>?\|`‘~-=_+/[] ·ˈˌ–—„\"“”"
+        line.translate({ord(c): " " for c in specials}).strip()
+    return line
+
+
+def open_clippings(filename, options):
     correct = set()
     N = 5
     with open(filename, 'r') as infile:
@@ -23,8 +41,8 @@ def open_clippings(filename):
             clippings.add(lines[3].strip().lower())
         for line in clippings:
             if len(line.split()) <= 2:
-                no_specials = line.translate({ord(c): " " for c in "!@#$%^&*()[]{};:,./<>?\|`‘~-=_+/[] ·ˈˌ–—„\"“”"})
-                if no_specials.strip():
+                no_specials = remove_specials(line, options)
+                if no_specials:
                     no_eses = no_specials.replace('’s', '')
                     no_eses = no_eses.replace('\'s', '')
                     no_backticks = no_eses.replace('’', '\'')
@@ -64,5 +82,6 @@ def transalate(words):
         #print('{} - {}'.format(word, str(dictionary.meaning(word))))
 
 if __name__ == '__main__':
-    words = open_clippings('./clippings.txt')
+    options = Options(remove_specials=True)
+    words = open_clippings('./clippings.txt', options)
     transalate(words)
