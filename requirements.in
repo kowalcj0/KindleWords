@@ -1,4 +1,6 @@
 flask==0.12
+flask-wtf==0.14.2
+peewee==2.8.5
 #ipython==5.2.2
 #jedi==0.10.0
 #pip-tools==1.7.0
