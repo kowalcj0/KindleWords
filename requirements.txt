@@ -4,24 +4,9 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-click==6.6                # via pip-tools
-decorator==4.0.10         # via ipython, traitlets
-first==2.0.1              # via pip-tools
-ipython-genutils==0.1.0   # via traitlets
-ipython==5.1.0
-jedi==0.9.0
-pexpect==4.2.1            # via ipython
-pickleshare==0.7.4        # via ipython
-pip-tools==1.7.0
-prompt-toolkit==1.0.8     # via ipython
-ptyprocess==0.5.1         # via pexpect
-pyenchant==1.6.8
-pygments==2.1.3           # via ipython
-simplegeneric==0.8.1      # via ipython
-six==1.10.0               # via pip-tools, prompt-toolkit, traitlets
-traitlets==4.3.1          # via ipython
-wcwidth==0.1.7            # via prompt-toolkit
-
-# The following packages are commented out because they are
-# considered to be unsafe in a requirements file:
-# setuptools                # via ipython
+click==6.7                # via flask
+flask==0.12
+itsdangerous==0.24        # via flask
+Jinja2==2.9.5             # via flask
+MarkupSafe==0.23          # via jinja2
+Werkzeug==0.11.15         # via flask
