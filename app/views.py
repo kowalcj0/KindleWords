@@ -47,7 +47,7 @@ def index():
 def definitions():
     form = WordsForm()
     if form.validate_on_submit():
-        words = [w.strip() for w in form.words.data.split(',')]
+        words = [w.strip().lower() for w in form.words.data.split(',')]
         definitions = get_definitions(words)
         return render_template('definitions.html',
                                title='Definitions',
