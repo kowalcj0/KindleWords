@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <h1 id='header'>Kindle Words</h1>
+        <form id='define-words' name='define-words' method='post' action='/definitions'>
+            {{ form.hidden_tag() }}
+            {{ form.words(cols=40, rows=20) }}
+            <input type="submit" value='Get definitions' />
+        </form>
+    </body>
+</html>

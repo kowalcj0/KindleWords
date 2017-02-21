@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <h1 id='header'>Word Definitions</h1>
+        {% for word in definitions %}
+		<p>
+        <b>{{ word }}</b><br>
+            {% for d in definitions[word] %}
+            {{ loop.index0 }} - {{ d }}<br>
+            {% endfor %}
+		</p>
+		{% endfor %}
+    </body>
+</html>
+
