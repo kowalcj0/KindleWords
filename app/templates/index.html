@@ -3,10 +3,10 @@
         <title>{{ title }}</title>
     </head>
     <body>
-        <h1 id='header'>Kindle Words</h1>
-        <form id='define-words' name='define-words' method='post' action='/definitions'>
+        <h1 id='header' align='center'>Kindle Words</h1>
+        <form id='define-words' name='define-words' method='post' action='/definitions' align='center'>
             {{ form.hidden_tag() }}
-            {{ form.words(cols=40, rows=20) }}
+            {{ form.words(cols=80, rows=20) }}<br>
             <input type="submit" value='Get definitions' />
         </form>
     </body>
