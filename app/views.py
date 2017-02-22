@@ -16,23 +16,24 @@ from app.models.definition import wordsXsensesXsynsets
 
 def get_definitions(words):
     db.connect()
-    #res = (wordsXsensesXsynsets
-           #.select(wordsXsensesXsynsets.lemma, fn.GROUP_CONCAT(wordsXsensesXsynsets.definition, '\r')).alias('definition')
-           #.where(wordsXsensesXsynsets.lemma << words)
-           #.group_by(wordsXsensesXsynsets.lemma))
     rs = (wordsXsensesXsynsets
-           .select(wordsXsensesXsynsets.lemma, wordsXsensesXsynsets.definition)
-           .where(wordsXsensesXsynsets.lemma << words))
+          .select(
+              wordsXsensesXsynsets.lemma,
+              wordsXsensesXsynsets.definition,
+              wordsXsensesXsynsets.pos)
+          .where(wordsXsensesXsynsets.lemma << words))
     res = {}
+    notfound = []
     for r in rs:
         if r.lemma not in res:
-            res[r.lemma] = []
-            res[r.lemma].append(r.definition)
-        else:
-            res[r.lemma].append(r.definition)
-
-    #definitions = [{'word': r.lemma, 'definition': r.definition} for r in res]
-    return res
+            res[r.lemma] = {}
+            res[r.lemma]['origin'] = None
+            res[r.lemma]['definitions'] = []
+        res[r.lemma]['definitions'].append({'pos': r.pos, 'definition': r.definition})
+    for w in words:
+        if w not in res:
+            notfound.append(w)
+    return res, notfound
 
 
 @app.route('/', methods=['GET'])
@@ -47,11 +48,21 @@ def index():
 def definitions():
     form = WordsForm()
     if form.validate_on_submit():
-        words = [w.strip().lower() for w in form.words.data.split(',')]
-        definitions = get_definitions(words)
+        words = set(w.strip().lower() for w in form.words.data.split(','))
+        definitions, notfound = get_definitions(words)
+        missing_plurals = [w[:-1] for w in notfound if w.endswith('s')]
+        plural_definitions, _ = get_definitions(missing_plurals)
+        for p in plural_definitions:
+            plural_definitions[p]['origin'] = '{}s'.format(p)
+        found_plurals = ['{}s'.format(w) for w in plural_definitions]
+        notfound = list(set(notfound) - set(found_plurals))
+        words_w_defs = {**definitions, ** plural_definitions}
+        app.logger.debug('Words: {}'.format(', '.join(words)))
+        app.logger.debug('Not found: {}'.format(', '.join(notfound)))
         return render_template('definitions.html',
                                title='Definitions',
-                               definitions=definitions)
+                               words=words_w_defs,
+                               notfound=notfound)
     else:
         app.logger.debug('Empty words form')
         return redirect('/')

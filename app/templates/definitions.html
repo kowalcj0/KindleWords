@@ -4,14 +4,26 @@
     </head>
     <body>
         <h1 id='header'>Word Definitions</h1>
-        {% for word in definitions %}
+        {% for word in words %}
 		<p>
-        <b>{{ word }}</b><br>
-            {% for d in definitions[word] %}
-            {{ loop.index0 }} - {{ d }}<br>
+        <b>{{ word }}</b> 
+        {% if words[word]['origin'] is not none %}
+        - <i>derived from: {{ words[word]['origin'] }}</i>
+        {% endif %}
+        <br>
+            {% for d in words[word]['definitions'] %}
+            {{ loop.index0 + 1 }} - <i>{{ d['pos'] }}</i> {{ d['definition'] }}<br>
             {% endfor %}
 		</p>
 		{% endfor %}
+        {% if notfound %}
+        <h1 id='header'>Could not find definitions for:</h1>
+        {% for word in notfound %}
+		<p>
+        <b>{{ word }}</b><br>
+		</p>
+		{% endfor %}
+		{% endif %}
     </body>
 </html>
 
