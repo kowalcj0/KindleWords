@@ -7,26 +7,23 @@ from peewee import TextField
 from playhouse.sqlite_ext import SqliteExtDatabase
 
 
-db = SqliteExtDatabase('./app/static/sqlite-31_snapshot.db')
+db = SqliteExtDatabase('./app/static/wn31-slim3.db')
 
 class BaseModel(Model):
     class Meta:
         database = db
 
-class wordsXsensesXsynsets(BaseModel):
-    """Model for the WordNet's wordsXsensesXsynsets table view.
+class words(BaseModel):
+    """Model for the slimmed down WordNet's wordsXsensesXsynsets table view.
 
-    This table holds the word (lemma) and it's definition.
+    This table holds:
+        * the word
+        * it's original WordNet wordID
+        * part of speech
+        * it's definition.
     """
-    wordid = IntegerField(primary_key=True)
-    lemma = CharField()
-    casedwordid = IntegerField()
-    synsetid = IntegerField()
-    senseid = IntegerField()
-    sensenum =  SmallIntegerField()
-    lexid =  SmallIntegerField()
-    tagcount = IntegerField()
-    sensekey = TextField()
+    id = IntegerField(primary_key=True)
+    wordid = IntegerField()
+    word = CharField()
     pos = CharField()
-    lexdomainid =  SmallIntegerField()
     definition = TextField()
