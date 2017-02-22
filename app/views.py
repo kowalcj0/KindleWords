@@ -11,25 +11,22 @@ from playhouse.shortcuts import model_to_dict
 from app import app
 from app.forms import WordsForm
 from app.models.definition import db
-from app.models.definition import wordsXsensesXsynsets
+from app.models.definition import words as words_tbl
 
 
 def get_definitions(words):
     db.connect()
-    rs = (wordsXsensesXsynsets
-          .select(
-              wordsXsensesXsynsets.lemma,
-              wordsXsensesXsynsets.definition,
-              wordsXsensesXsynsets.pos)
-          .where(wordsXsensesXsynsets.lemma << words))
+    rs = (words_tbl
+          .select(words_tbl.word, words_tbl.pos, words_tbl.definition)
+          .where(words_tbl.word << words))
     res = {}
     notfound = []
     for r in rs:
-        if r.lemma not in res:
-            res[r.lemma] = {}
-            res[r.lemma]['origin'] = None
-            res[r.lemma]['definitions'] = []
-        res[r.lemma]['definitions'].append({'pos': r.pos, 'definition': r.definition})
+        if r.word not in res:
+            res[r.word] = {}
+            res[r.word]['origin'] = None
+            res[r.word]['definitions'] = []
+        res[r.word]['definitions'].append({'pos': r.pos, 'definition': r.definition})
     for w in words:
         if w not in res:
             notfound.append(w)
