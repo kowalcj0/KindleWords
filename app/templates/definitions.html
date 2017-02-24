@@ -10,6 +10,9 @@
         {% for word in words %}
 		<p>
         <b>{{ word }}</b> 
+        {% if words[word]['us_ipa'] is not none %}
+         <i class='ipa'> {{ words[word]['us_ipa'] }}</i>
+        {% endif %}
         {% if words[word]['origin'] is not none %}
         - <i>derived from: {{ words[word]['origin'] }}</i>
         {% endif %}
