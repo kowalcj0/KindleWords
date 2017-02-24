@@ -24,6 +24,7 @@ class words(BaseModel):
     """
     id = IntegerField(primary_key=True)
     wordid = IntegerField()
-    word = CharField()
     pos = CharField()
+    us_ipa = TextField()
+    word = TextField()
     definition = TextField()
