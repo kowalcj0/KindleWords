@@ -27,6 +27,7 @@ def load_into_dict_sqlite():
             res[r['word']]['ipa'] = r['ipa']
         res[r['word']]['definitions'].append({'pos': r['pos'], 'definition': r['definition']})
     end = time.time()
+    conn.close()
     print('Successfully loaded {} word definitions from SQLite DB into Dict in: {}'.format(len(res), end - start))
     return res
 
