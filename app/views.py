@@ -17,15 +17,17 @@ from app.models.definition import words as words_tbl
 def get_definitions(words):
     db.connect()
     rs = (words_tbl
-          .select(words_tbl.word, words_tbl.pos, words_tbl.definition)
+          .select(words_tbl.word, words_tbl.pos, words_tbl.us_ipa, words_tbl.definition)
           .where(words_tbl.word << words))
     res = {}
     notfound = []
     for r in rs:
         if r.word not in res:
             res[r.word] = {}
+            res[r.word]['us_ipa'] = None
             res[r.word]['origin'] = None
             res[r.word]['definitions'] = []
+        res[r.word]['us_ipa'] = r.us_ipa
         res[r.word]['definitions'].append({'pos': r.pos, 'definition': r.definition})
     for w in words:
         if w not in res:
