@@ -2,12 +2,11 @@
     <head>
         <title>{{ title }}</title>
         <link rel="stylesheet" href="static/CharisSIL-webfont.css" type="text/css">
+        <link href="static/favicon.ico" rel="icon" type="image/x-icon" />
     </head>
     <body>
         <h1 id='header'>Word Definitions</h1>
-        <form action="/">
-			<input type="submit" value="Go back" />
-		</form>
+        <button onclick="window.history.back()">Go Back</button>
         {% for word in words %}
 		<p>
         <b>{{ word }}</b> 
@@ -33,4 +32,3 @@
 		{% endif %}
     </body>
 </html>
-
