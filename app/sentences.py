@@ -7,21 +7,35 @@ from pprint import pformat
 
 def word_idx():
     start = time.time()
-    ignored = set(["a", "all", "am", "an", "and", "are", "as", "at", "b", "be",
-        "been", "but", "by", "c", "can", "d", "did", "do", "e", "f", "first",
-        "for", "from", "g", "get", "go", "h", "has", "have", "he", "he'd",
-        "he's", "he'll", "his", "how", "i", "i'd", "i'll", "i'm", "if", "in",
-        "is", "it", "its", "it's", "it'll", "j", "k", "l", "m", "me", "my",
-        "n", "new", "no", "not", "o", "of", "ok", "on", "one", "or", "our", "p",
-        "pm", "q", "r", "re", "s", "she", "she'd", "she'll", "she's", "so",
-        "t", "than", "that", "the", "their", "they", "they're", "this", "to",
-        "u", "up", "us", "v", "w", "was", "we", "were", "what", "which",
-        "will", "with", "would", "x", "y", "you", "you'll", "your", "you're",
-        "z"])
+    ignored = set(["", "+", "-", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+        "10", "$1", "a", "about", "ago", "all", "also", "am", "an", "and",
+        "any", "are", "aren't", "as", "at", "b", "back", "be", "been",
+        "before", "better", "but", "by", "c", "can", "can't", "car", "cat",
+        "comes", "couldn't", "d", "dan", "did", "didn't", "do", "does",
+        "doesn't", "don't", "e", "else", "f", "few", "first", "for", "from",
+        "g", "gave", "get", "give", "go", "going", "good", "got", "h", "had",
+        "has", "hasn't", "have", "haven't", "he", "he'd", "he'll", "he's",
+        "her", "here", "him", "his", "how", "i", "i'd", "i'll", "i'm", "i've",
+        "if", "in", "into", "is", "isn't", "it", "it'll", "it's", "its", "j",
+        "just", "k", "know", "knows", "l", "let", "let's", "like", "lot", "m",
+        "make", "makes", "man", "many", "mary", "mary's", "me", "men", "mr",
+        "must", "my", "n", "need", "new", "no", "not", "now", "o", "of", "off",
+        "ok", "on", "one", "or", "our", "out", "own", "p", "pm", "q", "r",
+        "re", "reason", "s", "see", "seem", "seen", "she", "she'd", "she'll",
+        "she's", "should", "shouldn't", "so", "such", "t", "taking", "talk",
+        "tell", "ten", "than", "thank", "that", "that's", "the", "their",
+        "them", "then", "there", "they", "they're", "there's", "think", "this",
+        "three", "time", "to", "tom", "tom's", "too", "two", "u", "up", "us",
+        "use", "v", "very", "w", "want", "was", "wasn't", "we", "we'll",
+        "we're", "we've", "well", "went", "were", "what", "what's", "when",
+        "where", "who", "whole", "why", "will", "with", "won't", "work",
+        "would", "wouldn't", "x", "y", "you", "you'd", "you'll", "you're", 
+        "you've", "your", "z"])
     with open('./static/en_sorted.txt', 'r', newline='\n') as f:
         res = {}
         for i, line in enumerate(f):
             words = line.split(' ')
+            words = [w.strip().lower() for w in words]
             words = [w.replace('\n', '') for w in words]
             words = [w.replace('"', '') for w in words]
             words = [w.replace('.', '') for w in words]
@@ -36,7 +50,14 @@ def word_idx():
             words = [w.replace('[', '') for w in words]
             words = [w.replace('*', '') for w in words]
             words = [w.replace('--', '-') for w in words]
-            words = [w.strip().lower() for w in words]
+            tmp = []
+            for w in words:
+                if w.startswith("'"):
+                    w = w[1:]
+                if w.endswith("'"):
+                    w = w[:-1]
+                tmp.append(w)
+            words = tmp
             words = list(set(words) - ignored)
             for w in words:
                 if w in res:
@@ -45,6 +66,9 @@ def word_idx():
                     res[w] = [i]
     end = time.time()
     print('Building the list of frequencies took: {}'.format(end - start))
+    max_key = [(w, len(res[w])) for w in res if len(res[w]) > 999]
+    max_key = sorted(max_key, key=lambda x:x[1])
+    print('The longest list is \n{}'.format(pformat(max_key)))
     return res
 
 
@@ -87,7 +111,7 @@ def get_sentences(word_lines):
 def save_idx(idx):
     start = time.time()
     with open('./static/idx', 'w') as f:
-        json.dump(idx, f)
+        json.dump(idx, f, sort_keys=True)
     end = time.time()
     print('Saving idx to a file took: {}'.format(end - start))
 
