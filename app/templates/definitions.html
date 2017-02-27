@@ -21,6 +21,13 @@
             {{ loop.index0 + 1 }} - <i>{{ d['pos'] }}</i> {{ d['definition'] }}<br>
             {% endfor %}
 		</p>
+        {% if words[word]['sentences'] is defined %}
+        Example sentences:<br>
+            {% for s in words[word]['sentences'] %}
+            {{ loop.index0 + 1 }} - {{ s }} <br>
+            {% endfor %}
+        {% endif %}
+        <hr>
 		{% endfor %}
         {% if notfound %}
         <h1 id='header'>Could not find definitions for:</h1>
