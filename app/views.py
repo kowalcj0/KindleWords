@@ -72,7 +72,6 @@ def definitions():
         for word in word_sentences:
             if word in sortedres:
                 sortedres[word]['sentences'] = word_sentences[word]
-        app.logger.debug(sortedres)
         return render_template('definitions.html',
                                title='Definitions',
                                words=sortedres,
