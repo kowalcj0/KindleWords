@@ -9,7 +9,10 @@ from flask import redirect
 
 from app import app
 from app import MEMDB
+from app import SENTENCE_IDX
 from app.forms import WordsForm
+from app.sentences import get_line_numbers
+from app.sentences import get_sentences
 
 
 def get_definitions(words):
@@ -63,6 +66,13 @@ def definitions():
 
         app.logger.debug('Words: {}'.format(', '.join(words)))
         app.logger.debug('Not found: {}'.format(', '.join(notfound)))
+
+        line_numbers = get_line_numbers(idx=SENTENCE_IDX, words=words, max_sentences=5)
+        word_sentences = get_sentences(line_numbers)
+        for word in word_sentences:
+            if word in sortedres:
+                sortedres[word]['sentences'] = word_sentences[word]
+        app.logger.debug(sortedres)
         return render_template('definitions.html',
                                title='Definitions',
                                words=sortedres,

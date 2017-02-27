@@ -33,4 +33,8 @@ def load_into_dict_sqlite():
 
 MEMDB = load_into_dict_sqlite()
 
+from app import sentences
+
+SENTENCE_IDX = sentences.load_idx()
+
 from app import views
