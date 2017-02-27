@@ -8,6 +8,8 @@ button.
 Dictionary sources:
 * [WordNet](https://wordnet.princeton.edu/wordnet/download/current-version/) [3.1](http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz)
 * Spelling (in IPA notation) [English Spelling DictData](https://play.google.com/store/apps/details?id=colordict.dictdata.cmuaes)
+* example sentences come from [Tatoeba](http://tatoeba.org/eng/downloads)
+    project
 
 Tested with Python 3.5.2 and Python 3.6.0
 
@@ -21,6 +23,7 @@ There are:
 * out of all unique words 57275 spellings in
     [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)
     notation 
+* 608632 example English sentences
 
 # Benchmarks
 ------------
