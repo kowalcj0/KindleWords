@@ -9,6 +9,7 @@ from flask import redirect
 
 from app import app
 from app import MEMDB
+from app import THESAURUSDB
 from app import SENTENCE_IDX
 from app.forms import WordsForm
 from app.sentences import get_line_numbers
@@ -24,6 +25,21 @@ def get_definitions(words):
             res[w] = MEMDB[w]
     end = time.time()
     app.logger.debug('In-memory search took: {}'.format(end - start))
+    for w in words:
+        if w not in res:
+            notfound.append(w)
+    return res, notfound
+
+
+def get_thesaurus(words):
+    res = {}
+    notfound = []
+    start = time.time()
+    for w in words:
+        if w in THESAURUSDB:
+            res[w] = THESAURUSDB[w]
+    end = time.time()
+    app.logger.debug('In-memory thesaurus search took: {}'.format(end - start))
     for w in words:
         if w not in res:
             notfound.append(w)
@@ -57,6 +73,7 @@ def definitions():
         words = set(w.strip().lower() for w in form.words.data.split(','))
 
         definitions, notfound = get_definitions(words)
+        thesaurus, _ = get_thesaurus(words)
         plural_definitions, notfound = get_plural_definitions(notfound)
         notfound = sorted(notfound)
 
@@ -75,6 +92,7 @@ def definitions():
         return render_template('definitions.html',
                                title='Definitions',
                                words=sortedres,
+                               thesaurus=thesaurus,
                                notfound=notfound)
     else:
         app.logger.debug('Someone submitted an empty words form')
