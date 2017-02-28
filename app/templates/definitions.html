@@ -22,9 +22,15 @@
             {% endfor %}
 		</p>
         {% if words[word]['sentences'] is defined %}
-        Example sentences:<br>
+        <b><i>Example sentences:</i></b><br>
             {% for s in words[word]['sentences'] %}
             {{ loop.index0 + 1 }} - {{ s }} <br>
+            {% endfor %}
+        {% endif %}
+        {% if thesaurus[word] is defined %}
+        <b><i>Thesaurus:</i></b><br>
+            {% for t in thesaurus[word]['thesaurus'] %}
+            {{ loop.index0 + 1 }} - <i>{{ t['pos'] }}</i> [{{ t['origin'] }}] - {{ t['thesaurus'] }}<br>
             {% endfor %}
         {% endif %}
         <hr>
