@@ -10,6 +10,7 @@ Dictionary sources:
 * Spelling (in IPA notation) [English Spelling DictData](https://play.google.com/store/apps/details?id=colordict.dictdata.cmuaes)
 * example sentences come from [Tatoeba](http://tatoeba.org/eng/downloads)
     project
+* Thesaurus comes from [WordNet 3.0](https://play.google.com/store/apps/details?id=colordict.dictdata.dictionary.english.wordnet3&hl=en)
 
 Tested with Python 3.5.2 and Python 3.6.0
 
@@ -24,6 +25,7 @@ There are:
     [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)
     notation 
 * 608632 example English sentences
+* approx 20000 expressions in the thesaurus
 
 # Benchmarks
 ------------
