@@ -6,9 +6,15 @@
     <body>
         <h1 id='header' align='center'>Kindle Words</h1>
         <form id='define-words' name='define-words' method='post' action='/definitions' align='center'>
-            {{ form.hidden_tag() }}
-            {{ form.words(cols=80, rows=20) }}<br>
+            {{ words_form.hidden_tag() }}
+            {{ words_form.words(cols=80, rows=20) }}<br>
             <input type="submit" value='Get definitions' />
+        </form>
+        <h1 id='header' align='center'>Kindle Clippings</h1>
+        <form id='define-clippings' name='define-clippings' action='/upload' align='center' method="POST" enctype="multipart/form-data">
+            {{ clippings_form.hidden_tag() }}
+            {{ clippings_form.clippings() }}<br>
+            <input type="submit" value='Get definitions from Kindle clippings' />
         </form>
     </body>
 </html>
