@@ -65,10 +65,12 @@ def get_plural_definitions(words):
 
 @app.route('/', methods=['GET'])
 def index():
-    form = WordsForm()
+    words_form = WordsForm()
+    clippings_form = ClippingsForm()
     return render_template('index.html',
                            title='Home',
-                           form=form)
+                           words_form=words_form,
+                           clippings_form=clippings_form)
 
 
 @app.route('/definitions', methods=['POST'])
