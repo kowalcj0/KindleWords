@@ -6,7 +6,7 @@ from flask import Flask
 
 app = Flask(__name__)
 app.config.from_object('config')
-
+app.config['UPLOADED_CLIPPINGS_DEST'] = '/var/uploads'
 
 def load_into_dict_sqlite():
     res = {}
