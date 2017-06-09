@@ -75,6 +75,20 @@ def index():
                            clippings_form=clippings_form)
 
 
+@app.route('/api/thesaurus', methods=['POST'])
+def api_thesaurus():
+    if request.get_json():
+        app.logger.debug("got some JSON {}".format(request.get_json()))
+        json = request.get_json()
+        words = json["words"]
+        thesaurus, _ = get_thesaurus(words)
+        return jsonify(thesaurus)
+    else:
+        app.logger.debug('api/thesaurus - Someone submitted an empty JSON request form')
+        return jsonify({"thesaurus": []})
+
+
+
 @app.route('/api/definitions', methods=['POST'])
 def api_definitions():
     if request.get_json():
