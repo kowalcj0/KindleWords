@@ -8,7 +8,7 @@ button.
 Dictionary sources:
 * [WordNet](https://wordnet.princeton.edu/download/current-version) [3.1](http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz)
 * Spelling (in IPA notation) [English Spelling DictData](https://play.google.com/store/apps/details?id=colordict.dictdata.cmuaes)
-* example sentences come from [Tatoeba](http://tatoeba.org/eng/downloads)
+* example sentences come from [Tatoeba](https://tatoeba.org/eng/downloads)
     project
 * Thesaurus comes from [WordNet 3.0](https://play.google.com/store/apps/details?id=colordict.dictdata.dictionary.english.wordnet3&hl=en)
 
