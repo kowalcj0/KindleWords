@@ -3,9 +3,22 @@
         <title>{{ title }}</title>
         <link rel="stylesheet" href="static/CharisSIL-webfont.css" type="text/css">
         <link href="static/favicon.ico" rel="icon" type="image/x-icon" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script defer type="text/javascript" src="/static/speak.js"></script>
     </head>
     <body>
         <h1 id='header'>Word Definitions</h1>
+        <table id="speech-synthesis-demo">
+            <tbody colspan="2">
+            <tr>
+                <td>Choose the voice for speech synthesis:</td>
+                <td>
+                    <select id="voicelist">
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <button onclick="window.history.back()">Go Back</button>
         {% for word in words %}
 		<p>
@@ -16,6 +29,9 @@
         {% if words[word]['origin'] is not none %}
         - <i>derived from: {{ words[word]['origin'] }}</i>
         {% endif %}
+            <button onclick="speak('{{ word }}')" alt="hear synthesized pronunciation">
+                <img src="static/volume-loud.svg" height="10pt"/>
+            </button>
         <br>
             {% for d in words[word]['definitions'] %}
             {{ loop.index0 + 1 }} - <i>{{ d['pos'] }}</i> {{ d['definition'] }}<br>
