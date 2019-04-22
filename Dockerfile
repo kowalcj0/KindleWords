@@ -1,4 +1,4 @@
-FROM python:rc-alpine3.8
+FROM python:3.8-rc-alpine
 MAINTAINER kowalcj0 "kowalcj0@email.me"
 RUN apk add enchant
 COPY . /app
