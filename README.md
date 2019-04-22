@@ -6,7 +6,7 @@ Simply enter a list of comma-separated words and hit the "Get Definitions"
 button.
 
 Dictionary sources:
-* [WordNet](https://wordnet.princeton.edu/wordnet/download/current-version/) [3.1](http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz)
+* [WordNet](https://wordnet.princeton.edu/download/current-version) [3.1](http://wordnetcode.princeton.edu/wn3.1.dict.tar.gz)
 * Spelling (in IPA notation) [English Spelling DictData](https://play.google.com/store/apps/details?id=colordict.dictdata.cmuaes)
 * example sentences come from [Tatoeba](http://tatoeba.org/eng/downloads)
     project
