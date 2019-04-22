@@ -226,7 +226,7 @@ def word_idx():
             "z",
         ]
     )
-    with open("./static/en_sorted.txt", "r", newline="\n") as f:
+    with open("./static/eng_sentences.txt", "r", newline="\n") as f:
         res = {}
         for i, line in enumerate(f):
             words = line.split(" ")
@@ -290,7 +290,7 @@ def get_line_numbers(idx, words, max_sentences=2):
 def get_sentences(word_lines):
     res = {}
     start = time.time()
-    with open("./app/static/en_sorted.txt", "r", newline="\n") as f:
+    with open("./app/static/eng_sentences.txt", "r", newline="\n") as f:
         sentences = f.readlines()
         for word in word_lines:
             lines = word_lines[word]
