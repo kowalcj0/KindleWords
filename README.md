@@ -28,7 +28,7 @@ There are:
 * out of all unique words 57275 spellings in
     [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet)
     notation 
-* 608632 example English sentences
+* 370366 example English sentences
 * approx 20000 expressions in the thesaurus
 
 # Benchmarks
