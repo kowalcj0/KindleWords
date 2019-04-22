@@ -19,6 +19,9 @@ Blocked words - Sources:
 * https://github.com/DivineOmega/is_offensive/blob/master/resources/BadWords.json
 * https://github.com/ben174/profanity/blob/master/profanity/data/wordlist.txt
 
+# Other resources
+* Icons https://www.ikonate.com/
+
 # Stats
 
 There are:
