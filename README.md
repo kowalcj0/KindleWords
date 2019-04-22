@@ -1,4 +1,4 @@
-KindleWords
+wort
 ===========
 
 Get definitions for multiple English words at once.
@@ -52,18 +52,18 @@ Searching for random unordered 1000 words takes around: 0.000804s
 ## Build image
 
 ```bash
-    docker build -t kindle-words:latest .
+    docker build -t wort:latest .
 ```
 
 ## Run the container
 
 ```bash
-    docker run --rm --name web kindle-words run.py
+    docker run --rm --name web wort run.py
 ```
 
 ## Run the app by mounting local host src dir
 ```bash
-    docker run -d -p 5000:5000 --name web --rm -v ~/git/KindleWords:/app kindle-words /app/run.py
+    docker run -d -p 5000:5000 --name web --rm -v ~/git/wort:/app wort /app/run.py
 ```
 
 ## Get the logs
