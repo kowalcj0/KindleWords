@@ -16,11 +16,14 @@ class WordsForm(FlaskForm):
     )
 
 
-clippings = UploadSet('clippings', TEXT)
+clippings = UploadSet("clippings", TEXT)
 configure_uploads(app, (clippings,))
+
 
 class ClippingsForm(FlaskForm):
     placeholder = "Select you Kindle `clippings.txt` file"
-    clippings = FileField('clippings',
-            validators=[FileRequired(), FileAllowed(clippings, '*.txt files only!')],
-        description=placeholder)
+    clippings = FileField(
+        "clippings",
+        validators=[FileRequired(), FileAllowed(clippings, "*.txt files only!")],
+        description=placeholder,
+    )
