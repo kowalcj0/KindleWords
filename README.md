@@ -14,6 +14,10 @@ Dictionary sources:
 
 Tested with Python 3.8.0a3
 
+Blocked words - Sources:
+* https://www.cs.cmu.edu/~biglou/resources/bad-words.txt
+* https://github.com/DivineOmega/is_offensive/blob/master/resources/BadWords.json
+* https://github.com/ben174/profanity/blob/master/profanity/data/wordlist.txt
 
 # Stats
 
