@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask_uploads import TEXT, UploadSet, configure_uploads
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed, FileRequired
