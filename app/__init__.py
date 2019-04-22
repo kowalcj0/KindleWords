@@ -4,7 +4,6 @@ import time
 
 from flask import Flask
 
-from app import sentences, views
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -77,4 +76,8 @@ MEMDB = load_into_dict_sqlite()
 THESAURUSDB = load_thesaurus_into_dict_sqlite()
 
 
+from app import sentences
+
 SENTENCE_IDX = sentences.load_idx()
+
+from app import views
