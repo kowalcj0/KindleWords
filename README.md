@@ -12,7 +12,7 @@ Dictionary sources:
     project
 * Thesaurus comes from [WordNet 3.0](https://play.google.com/store/apps/details?id=colordict.dictdata.dictionary.english.wordnet3&hl=en)
 
-Tested with Python 3.5.2 and Python 3.6.0
+Tested with Python 3.8.0a3
 
 
 # Stats
@@ -40,10 +40,8 @@ Searching for random unordered 1000 words takes around: 0.000804s
 
 # TODO
 
-* generate PDF with "memory-cards"
+* generate Anki flash-cards
 * get word definitions directly from a CSV file
-* get word definitions directly from Kindle's "My Clippings.txt" file
-
 
 
 # Docker
