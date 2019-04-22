@@ -1,7 +1,4 @@
-flask==0.12
-flask-wtf==0.14.2
-Flask-Uploads==0.2.1
-#ipython==5.2.2
-#jedi==0.10.0
-#pip-tools==1.7.0
-#pyenchant==1.6.8
+Flask-Uploads
+flask
+flask-wtf
+pyenchant
