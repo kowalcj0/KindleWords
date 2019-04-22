@@ -1,9 +1,9 @@
-from typing import NamedTuple
-from string import digits
-import enchant
-from itertools import zip_longest
 import sqlite3
+from itertools import zip_longest
+from string import digits
+from typing import NamedTuple
 
+import enchant
 
 Options = NamedTuple('Options', [('remove_specials', bool)])
 

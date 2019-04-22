@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-import time
 import sqlite3
+import time
 
 from flask import Flask
+
+from app import sentences, views
 
 app = Flask(__name__)
 app.config.from_object('config')
