@@ -288,21 +288,21 @@ def get_line_numbers(idx, words, max_sentences=2):
 
 
 def get_sentences(word_lines):
-    res = {}
+    result = {}
     start = time.time()
-    with open("./app/static/eng_sentences.txt", "r", newline="\n") as f:
-        sentences = f.readlines()
+    with open("./app/static/eng_sentences.txt", "r", newline="\n") as file:
+        sentences = file.readlines()
         for word in word_lines:
             lines = word_lines[word]
             for line in lines:
-                if word in res:
-                    res[word].append(sentences[line].replace("\n", ""))
+                if word in result:
+                    result[word].append(sentences[line].replace("\n", ""))
                 else:
-                    res[word] = []
-                    res[word].append(sentences[line].replace("\n", ""))
+                    result[word] = []
+                    result[word].append(sentences[line].replace("\n", ""))
     end = time.time()
     print("Getting sentences from the file took: {}".format(end - start))
-    return res
+    return result
 
 
 def save_idx(idx):
